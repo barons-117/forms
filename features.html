@@ -15,209 +15,343 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Outfit',sans-serif;background:#F9FAFB;color:#18181B;line-height:1.65}
+    html{scroll-behavior:smooth}
+    body{font-family:'Outfit',system-ui,sans-serif;background:#F9FAFB;color:#18181B;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
     a{color:inherit;text-decoration:none}
-    nav{position:sticky;top:0;z-index:50;background:rgba(249,250,251,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,232,240,0.8);height:64px} .nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
-    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:#18181B;letter-spacing:-0.02em}
-    .logo-mark{width:34px;height:34px;background:linear-gradient(135deg,#F97316,#F59E0B);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .nav-links{display:flex;gap:28px;align-items:center;font-size:14px;font-weight:600;color:#52525B}
-    .nav-links a:hover{color:#F97316}
-    .nav-cta{padding:10px 22px;background:#18181B;color:white;border-radius:10px;font-size:14px;font-weight:700;transition:transform 0.15s,background 0.15s}
-    .nav-cta:hover{background:#27272A;transform:translateY(-1px)}
-    .hero{max-width:800px;margin:0 auto;padding:80px 40px 60px;text-align:center}
-    .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(249,115,22,0.08);border:1.5px solid rgba(249,115,22,0.2);border-radius:100px;font-size:12px;font-weight:700;color:#F97316;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:24px}
-    .badge-dot{width:6px;height:6px;border-radius:50%;background:#F97316}
-    h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;letter-spacing:-0.04em;line-height:1.08;margin-bottom:20px;color:#18181B}
-    h1 span{background:linear-gradient(135deg,#F97316,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero-sub{font-size:1.1rem;color:#71717A;max-width:580px;margin:0 auto 40px}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,#F97316,#F59E0B);color:white;font-weight:800;font-size:16px;border-radius:12px;text-decoration:none;box-shadow:0 4px 20px rgba(249,115,22,0.3);transition:transform 0.15s,box-shadow 0.2s}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(249,115,22,0.4)}
-    .features-grid{max-width:1100px;margin:0 auto;padding:40px 40px 100px}
-    .section-label{text-align:center;font-size:13px;font-weight:700;color:#F97316;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
-    h2.section-title{text-align:center;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:56px;color:#18181B}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:60px}
-    .feature-card{background:white;border-radius:20px;padding:32px;border:1.5px solid rgba(226,232,240,0.8);transition:transform 0.2s,box-shadow 0.2s}
-    .feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
-    .feature-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:22px}
-    .feature-card h3{font-size:17px;font-weight:700;color:#18181B;margin-bottom:10px}
-    .feature-card p{font-size:14px;color:#71717A;line-height:1.65}
-    .icon-orange{background:#FFF7ED}
-    .icon-blue{background:#EFF6FF}
-    .icon-green{background:#F0FDF4}
-    .icon-purple{background:#F5F3FF}
-    .icon-red{background:#FFF1F2}
-    .icon-yellow{background:#FFFBEB}
-    .bento{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px}
-    .bento-sm{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
-    .feature-card.large{padding:40px}
-    .feature-card.large h3{font-size:20px;margin-bottom:12px}
-    .tag{display:inline-block;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px}
-    .tag-orange{background:#FFF7ED;color:#C2410C}
-    .tag-blue{background:#EFF6FF;color:#1D4ED8}
-    .tag-green{background:#F0FDF4;color:#15803D}
-    .divider{border:none;border-top:1px solid rgba(226,232,240,0.8);margin:60px 0}
-    .cta-section{text-align:center;padding:80px 40px}
-    .cta-section h2{font-size:2rem;font-weight:900;letter-spacing:-0.03em;margin-bottom:12px}
-    .cta-section p{color:#71717A;font-size:16px;margin-bottom:32px}
-    footer{border-top:1px solid rgba(226,232,240,0.8);padding:24px 40px;text-align:center;color:#A1A1AA;font-size:13px}
-    @media(max-width:768px){nav{padding:0 20px}.hero{padding:60px 20px 40px}.features-grid{padding:20px 20px 60px}.bento,.bento-sm{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+
+    /* Grain overlay */
+    body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;opacity:0.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+    /* Nav */
+    nav{position:sticky;top:0;z-index:50;background:rgba(249,250,251,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(226,232,240,0.7)}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:#18181B;letter-spacing:-0.025em;flex-shrink:0}
+    .logo-mark{width:34px;height:34px;background:linear-gradient(135deg,#F97316,#F59E0B);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+    .nav-links{display:flex;gap:32px;align-items:center}
+    .nav-link{font-size:14px;font-weight:600;color:#52525B;position:relative;padding:4px 0;transition:color 0.15s}
+    .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1.5px;background:#F97316;transform:scaleX(0);transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);transform-origin:left}
+    .nav-link:hover{color:#F97316}
+    .nav-link:hover::after{transform:scaleX(1)}
+    html[dir=rtl] .nav-link::after{transform-origin:right}
+    .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .lang-pill-wrap{display:flex;gap:4px}
+    .lbtn{cursor:pointer;padding:7px 16px;border-radius:100px;font-size:13px;font-weight:700;border:1.5px solid;font-family:'Outfit',sans-serif;transition:all 0.15s}
+    .lbtn.on{background:#18181B;color:white;border-color:#18181B}
+    .lbtn.off{background:transparent;color:#71717A;border-color:rgba(226,232,240,0.8)}
+    .lbtn.off:hover{border-color:#18181B;color:#18181B}
+    .admin-btn{padding:10px 22px;background:white;color:#18181B;border:1.5px solid rgba(226,232,240,0.9);border-radius:100px;font-size:14px;font-weight:700;transition:all 0.2s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+    .admin-btn:hover{border-color:#18181B;box-shadow:0 4px 16px rgba(0,0,0,0.1);transform:translateY(-1px)}
+    @media(max-width:768px){.nav-links{display:none}.nav-inner{padding:0 1.25rem}}
+
+    /* Hero */
+    .hero{max-width:760px;margin:0 auto;padding:clamp(4rem,8vw,6rem) 2.5rem clamp(2.5rem,5vw,4rem);text-align:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.18);border-radius:100px;font-size:12px;font-weight:700;color:#F97316;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem}
+    .eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#F97316;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.85)}}
+    h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;letter-spacing:-0.04em;line-height:1.08;margin-bottom:1.25rem;color:#18181B;text-wrap:balance}
+    h1 span{background:linear-gradient(130deg,#F97316 20%,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:1.05rem;color:#71717A;max-width:540px;margin:0 auto 2.5rem;line-height:1.7}
+    .cta-pill{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:#18181B;color:white;font-weight:700;font-size:15px;border-radius:100px;font-family:'Outfit',sans-serif;transition:transform 0.2s cubic-bezier(0.16,1,0.3,1),box-shadow 0.2s;box-shadow:0 4px 24px rgba(0,0,0,0.18)}
+    .cta-pill:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 32px rgba(0,0,0,0.22)}
+    .cta-pill:active{transform:scale(0.97)}
+
+    /* Content */
+    .content{max-width:1200px;margin:0 auto;padding:0 2.5rem clamp(4rem,8vw,7rem)}
+
+    /* Section heading */
+    .section-eyebrow{font-size:12px;font-weight:700;color:#F97316;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem}
+    h2.sh{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;letter-spacing:-0.03em;line-height:1.12;margin-bottom:clamp(2.5rem,5vw,3.5rem);color:#18181B;text-wrap:balance}
+
+    /* Divider */
+    .div{border:none;border-top:1px solid rgba(226,232,240,0.7);margin:clamp(3rem,6vw,5rem) 0}
+
+    /* Spotlight cards */
+    .card{background:white;border:1px solid rgba(226,232,240,0.55);border-radius:1.5rem;padding:2rem;position:relative;overflow:hidden;cursor:default;box-shadow:0 20px 40px -15px rgba(0,0,0,0.05);transition:box-shadow 0.25s,transform 0.25s}
+    .card::before{content:'';position:absolute;inset:0;border-radius:1.5rem;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),var(--acc,#F97316)09,transparent 70%);pointer-events:none;z-index:0}
+    .card::after{content:'';position:absolute;top:0;left:1.5rem;right:1.5rem;height:2px;background:linear-gradient(90deg,var(--acc,#F97316)80,transparent);border-radius:0 0 2px 2px;z-index:1}
+    .card:hover{transform:translateY(-3px)}
+    .card-content{position:relative;z-index:2}
+    .card-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#94A3B8;margin-bottom:1rem}
+    .card-icon{color:var(--acc,#F97316);margin-bottom:1rem;line-height:1}
+    .card h3{font-size:15px;font-weight:700;color:#18181B;margin-bottom:0.6rem;line-height:1.3;text-wrap:balance}
+    .card p{font-size:13.5px;color:#71717A;line-height:1.65;margin:0}
+
+    /* Bento layouts */
+    .bento-21{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px}
+    .bento-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+    .bento-12{display:grid;grid-template-columns:1fr 2fr;gap:16px;margin-bottom:16px}
+    .bento-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+    @media(max-width:768px){.bento-21,.bento-3,.bento-12,.bento-2{grid-template-columns:1fr}.content{padding-left:1.25rem;padding-right:1.25rem}.hero{padding-left:1.25rem;padding-right:1.25rem}}
+
+    /* Flow steps */
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid rgba(226,232,240,0.6);border-radius:1.5rem;overflow:hidden;background:white;box-shadow:0 20px 40px -15px rgba(0,0,0,0.05);margin-bottom:clamp(3rem,5vw,4rem)}
+    .flow-step{padding:2rem 1.5rem;border-right:1px solid rgba(226,232,240,0.6);text-align:center;transition:background 0.2s}
+    .flow-step:last-child{border-right:none}
+    .flow-step:hover{background:#FFFBF7}
+    .flow-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F97316,#F59E0B);color:white;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;box-shadow:0 4px 12px rgba(249,115,22,0.25)}
+    .flow-step h4{font-size:14px;font-weight:700;margin-bottom:0.5rem;color:#18181B}
+    .flow-step p{font-size:12.5px;color:#71717A;line-height:1.55}
+    @media(max-width:768px){.flow{grid-template-columns:1fr}.flow-step{border-right:none;border-bottom:1px solid rgba(226,232,240,0.6)}.flow-step:last-child{border-bottom:none}}
+
+    /* Lang table */
+    .lt{width:100%;border-collapse:collapse;margin-bottom:clamp(3rem,5vw,4rem);background:white;border-radius:1.5rem;overflow:hidden;box-shadow:0 20px 40px -15px rgba(0,0,0,0.05)}
+    .lt th{text-align:left;padding:14px 18px;font-size:12px;font-weight:700;color:#52525B;border-bottom:1px solid rgba(226,232,240,0.7);background:#F9FAFB;letter-spacing:0.04em;text-transform:uppercase}
+    .lt td{padding:14px 18px;font-size:14px;border-bottom:1px solid rgba(226,232,240,0.4)}
+    .lt tr:last-child td{border-bottom:none}
+    .lt tr:hover td{background:#FFFBF7}
+    .check{color:#10B981;font-weight:700}
+    .pill-green{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;background:#F0FDF4;color:#15803D;letter-spacing:0.03em}
+
+    /* FAQ */
+    .faq-item{border-bottom:1px solid rgba(226,232,240,0.7);padding:1.5rem 0}
+    .faq-item:last-child{border-bottom:none}
+    .faq-item h4{font-size:15px;font-weight:700;margin-bottom:0.6rem;color:#18181B}
+    .faq-item p{font-size:14px;color:#71717A;line-height:1.65}
+
+    /* CTA section */
+    .cta-section{text-align:center;padding:clamp(4rem,8vw,7rem) 2.5rem;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(249,115,22,0.07) 0%,transparent 65%);pointer-events:none}
+    .cta-section .line{width:120px;height:2px;background:linear-gradient(90deg,transparent,#F97316,#F59E0B,transparent);border-radius:2px;margin:0 auto 2rem}
+    .cta-section h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-0.04em;line-height:1.06;margin-bottom:1rem;color:#18181B;position:relative}
+    .cta-section p{color:#71717A;font-size:16px;margin-bottom:2.5rem;position:relative}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(226,232,240,0.7);padding:1.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .foot-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#18181B}
+    .foot-lm{width:26px;height:26px;background:linear-gradient(135deg,#F97316,#F59E0B);border-radius:7px;display:flex;align-items:center;justify-content:center}
+    .foot-links{display:flex;gap:24px;font-size:13px;color:#71717A}
+    .foot-links a{color:#71717A;transition:color 0.15s}
+    .foot-links a:hover{color:#F97316}
+    footer span{color:#A1A1AA;font-size:13px}
   </style>
 </head>
 <body>
 
-<nav><div class="nav-inner">
-  <a href="/" class="logo">
-    <div class="logo-mark">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <rect x="3" y="4" width="14" height="2.5" rx="1.25" fill="white"/>
-        <rect x="3" y="9" width="10" height="2.5" rx="1.25" fill="white"/>
-        <rect x="3" y="14" width="7" height="2.5" rx="1.25" fill="white" opacity="0.7"/>
-      </svg>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-mark">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="3.5" width="13" height="2.2" rx="1.1" fill="white"/><rect x="2.5" y="7.9" width="9" height="2.2" rx="1.1" fill="white"/><rect x="2.5" y="12.3" width="6" height="2.2" rx="1.1" fill="white" opacity="0.7"/></svg>
+      </div>
+      tofes.pro
+    </a>
+    <div class="nav-links">
+      <a href="/features.html"     class="nav-link" data-en="Features"    data-he="יכולות">Features</a>
+      <a href="/capabilities.html" class="nav-link" data-en="How it works" data-he="איך זה עובד">How it works</a>
     </div>
-    tofes.pro
-  </a>
-  <div class="nav-links">
-    <a href="/features.html">Features</a>
-    <a href="/capabilities.html">Capabilities</a>
-    <a href="/#/admin" class="nav-cta">Admin Login</a>
+    <div class="nav-right">
+      <div class="lang-pill-wrap">
+        <button class="lbtn on"  id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lbtn off" id="btn-he" onclick="setLang('he')">עב</button>
+      </div>
+      <a href="/#/admin" class="admin-btn" data-en="Admin login" data-he="כניסה לניהול">Admin login</a>
+    </div>
   </div>
-</div></nav>
+</nav>
 
 <section class="hero">
-  <div class="badge"><span class="badge-dot"></span> Full Feature List</div>
+  <div class="eyebrow"><span class="eyebrow-dot"></span> <span data-en="Full Feature List" data-he="רשימת יכולות מלאה">Full Feature List</span></div>
   <h1>Everything your forms <span>need to convert</span></h1>
   <p class="hero-sub">tofes.pro gives marketers and agencies a complete form-building toolkit — from field-level design control to real-time email alerts and campaign tracking.</p>
-  <a href="/#/admin" class="btn-primary">Start building →</a>
+  <a href="/#/admin" class="cta-pill" data-en="Start building →" data-he="מתחילים ←">Start building →</a>
 </section>
 
-<div class="features-grid">
+<div class="content">
 
-  <p class="section-label">Core features</p>
-  <h2 class="section-title">Built for results, not just aesthetics</h2>
+  <p class="section-eyebrow">Core features</p>
+  <h2 class="sh">Built for results, not just aesthetics</h2>
 
-  <!-- Bento row 1 -->
-  <div class="bento">
-    <div class="feature-card large">
-      <span class="tag tag-orange">Setup</span>
-      <div class="feature-icon icon-orange">⚡</div>
-      <h3>Live in under 2 minutes</h3>
-      <p>Create a form, add your fields, choose colors, set recipients. No configuration maze, no developer required. Your form URL is ready the moment you click publish. Share it anywhere — ads, bio links, email campaigns, landing pages.</p>
+  <div class="bento-21">
+    <div class="card" style="--acc:#F97316">
+      <div class="card-content">
+        <div class="card-label">Setup</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M13 2L5 13h6l-2 7L19 9h-6L13 2z" fill="#F97316"/></svg></div>
+        <h3>Live in under 2 minutes</h3>
+        <p>Create a form, add fields, choose colors, set recipients. No configuration maze, no developer required. Your URL is ready the moment you click publish.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <span class="tag tag-blue">Language</span>
-      <div class="feature-icon icon-blue">🌍</div>
-      <h3>Field-level direction control</h3>
-      <p>Mix Hebrew and English in the same form. Each field has its own RTL or LTR setting, independent of the form's overall language.</p>
+    <div class="card" style="--acc:#3B82F6">
+      <div class="card-content">
+        <div class="card-label">Language</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#3B82F6" strokeWidth="1.6"/><ellipse cx="11" cy="11" rx="3.8" ry="9" stroke="#3B82F6" strokeWidth="1.6"/><path d="M2 11h18M2 7h18M2 15h18" stroke="#3B82F6" strokeWidth="1.6" strokeLinecap="round"/></svg></div>
+        <h3>Field-level direction control</h3>
+        <p>Mix Hebrew and English in the same form. Each field has its own RTL or LTR setting, fully independent of the overall form direction.</p>
+      </div>
     </div>
   </div>
 
-  <!-- Bento row 2 -->
-  <div class="bento-sm">
-    <div class="feature-card">
-      <div class="feature-icon icon-green">📬</div>
-      <h3>Instant email alerts</h3>
-      <p>A formatted email lands in every recipient's inbox the moment someone submits. No polling, no delays, no missed leads.</p>
+  <div class="bento-3">
+    <div class="card" style="--acc:#10B981">
+      <div class="card-content">
+        <div class="card-label">Alerts</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="13" rx="2.5" stroke="#10B981" strokeWidth="1.6"/><path d="M2 8.5l9 5.5 9-5.5" stroke="#10B981" strokeWidth="1.6" strokeLinecap="round"/></svg></div>
+        <h3>Instant email alerts</h3>
+        <p>A formatted email hits every recipient the moment someone submits. No polling, no delays, no missed leads.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon icon-purple">📊</div>
-      <h3>Submission dashboard</h3>
-      <p>Search, filter by date, sort by any column, and export to CSV. Every response is stored and searchable.</p>
+    <div class="card" style="--acc:#8B5CF6">
+      <div class="card-content">
+        <div class="card-label">Data</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="13" width="4" height="6" rx="1" fill="#8B5CF6"/><rect x="9" y="8" width="4" height="11" rx="1" fill="#8B5CF6"/><rect x="15" y="3" width="4" height="16" rx="1" fill="#8B5CF6"/></svg></div>
+        <h3>Submission dashboard</h3>
+        <p>Search, filter by date, sort by any column, export to CSV. Every response is stored and searchable.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon icon-red">🎯</div>
-      <h3>Facebook Pixel per form</h3>
-      <p>Add a unique Pixel ID to each form independently. Track leads and optimize ad campaigns with real conversion data.</p>
-    </div>
-  </div>
-
-  <hr class="divider"/>
-
-  <p class="section-label">Design control</p>
-  <h2 class="section-title">Your form, your brand</h2>
-
-  <div class="grid">
-    <div class="feature-card">
-      <div class="feature-icon icon-yellow">🎨</div>
-      <h3>9 color controls per form</h3>
-      <p>Background, card, title, labels, input borders, input text, button background, button text, and accent bar — each independently adjustable.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon icon-orange">📐</div>
-      <h3>12-column layout grid</h3>
-      <p>Place fields side by side with up to 6 columns per row. Set each field's width — half, third, quarter, or full — and position the submit button anywhere in the grid.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon icon-blue">📏</div>
-      <h3>4 form width presets</h3>
-      <p>Choose from 520px, 700px, 900px, or 1100px for the form card width. Always full-width on mobile regardless of selection.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon icon-green">✅</div>
-      <h3>GDPR consent checkbox</h3>
-      <p>Add a consent checkbox below the submit button with custom text, hyperlinks, and required enforcement. Includes preview while editing.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon icon-purple">💬</div>
-      <h3>Custom thank-you experience</h3>
-      <p>Set a personalized thank-you message, a custom button with your own label and URL, or a direct redirect to any destination.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon icon-yellow">🔤</div>
-      <h3>Custom submit button text</h3>
-      <p>Change the submit button label to anything: "Register", "Send", "Join us", "הירשם" — full control over the call to action.</p>
+    <div class="card" style="--acc:#E11D48">
+      <div class="card-content">
+        <div class="card-label">Tracking</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#E11D48" strokeWidth="1.6"/><circle cx="11" cy="11" r="5" stroke="#E11D48" strokeWidth="1.6"/><circle cx="11" cy="11" r="2" fill="#E11D48"/></svg></div>
+        <h3>Per-form Facebook Pixel</h3>
+        <p>Assign a unique Pixel ID to each form. The Lead event fires on submission — real data, per campaign, per client.</p>
+      </div>
     </div>
   </div>
 
-  <hr class="divider"/>
+  <hr class="div"/>
 
-  <p class="section-label">Field types</p>
-  <h2 class="section-title">Every field type you need</h2>
+  <p class="section-eyebrow">Design control</p>
+  <h2 class="sh">Your form, your brand</h2>
 
-  <div class="grid">
-    <div class="feature-card">
-      <h3>Text</h3>
-      <p>Free-text input for names, addresses, and any short answer. Configurable direction and placeholder alignment.</p>
+  <div class="bento-12">
+    <div class="card" style="--acc:#F59E0B">
+      <div class="card-content">
+        <div class="card-label">Colors</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M15.5 2.5l4 4-9.5 9.5-4 1 1-4L15.5 2.5z" stroke="#F59E0B" strokeWidth="1.6" strokeLinejoin="round"/><path d="M6 17c0 1.7-1.7 2.5-2.5 2.5C4 19 4 17 6 17z" fill="#F59E0B"/></svg></div>
+        <h3>Nine color controls</h3>
+        <p>Background, card, title, labels, borders, input text, button, accent bar — each form is a blank canvas.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>Email</h3>
-      <p>Email input with built-in format validation. Always left-aligned regardless of form direction.</p>
+    <div class="card" style="--acc:#F97316">
+      <div class="card-content">
+        <div class="card-label">Layout</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="#F97316" strokeWidth="1.6"/><rect x="13" y="2" width="7" height="7" rx="1.5" stroke="#F97316" strokeWidth="1.6"/><rect x="2" y="13" width="7" height="7" rx="1.5" stroke="#F97316" strokeWidth="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.5" stroke="#F97316" strokeWidth="1.6"/></svg></div>
+        <h3>12-column layout grid — up to 6 fields per row</h3>
+        <p>Place fields side by side with granular width control. Set each field's column span independently — half, third, sixth — and drop the submit button anywhere in the grid. The layout collapses cleanly to single column on mobile with zero configuration.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>Phone</h3>
-      <p>Phone number field with format validation. Accepts international formats.</p>
+  </div>
+
+  <div class="bento-3">
+    <div class="card" style="--acc:#3B82F6">
+      <div class="card-content">
+        <div class="card-label">Width presets</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11h14M4 7h14M4 15h14" stroke="#3B82F6" strokeWidth="1.6" strokeLinecap="round"/></svg></div>
+        <h3>Four form width presets</h3>
+        <p>520 · 700 · 900 · 1100px. Always full-width on mobile regardless of selection.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>Dropdown (Select)</h3>
-      <p>Comma-separated list of options rendered as a clean dropdown. Great for segmenting your leads.</p>
+    <div class="card" style="--acc:#06B6D4">
+      <div class="card-content">
+        <div class="card-label">Compliance</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2l8 3.5v5.5c0 4.5-3.5 7.5-8 8.5-4.5-1-8-4-8-8.5V5.5L11 2z" stroke="#06B6D4" strokeWidth="1.6" strokeLinejoin="round"/><path d="M7.5 11l3 3 4-5" stroke="#06B6D4" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
+        <h3>GDPR consent checkbox</h3>
+        <p>Consent with hyperlinked terms, required enforcement, and a live preview while editing.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>Checkbox</h3>
-      <p>Single checkbox for quick yes/no answers. Position adapts to form language — checkbox left for English, right for Hebrew.</p>
+    <div class="card" style="--acc:#10B981">
+      <div class="card-content">
+        <div class="card-label">Thank you</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="13" rx="2.5" stroke="#10B981" strokeWidth="1.6"/><path d="M8 11l2.5 2.5L14 9" stroke="#10B981" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
+        <h3>Custom thank-you experience</h3>
+        <p>Branded message, custom button with label and URL, or a direct redirect — per form.</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>Long text (Textarea)</h3>
-      <p>Resizable text area for messages, comments, or longer responses. Respects RTL/LTR direction settings.</p>
-    </div>
+  </div>
+
+  <hr class="div"/>
+
+  <p class="section-eyebrow">Multilingual support</p>
+  <h2 class="sh">Right-to-left that actually works</h2>
+
+  <table class="lt">
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>Hebrew (RTL)</th>
+        <th>English (LTR)</th>
+        <th>Mixed in same form</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Form direction</td><td><span class="check">✓</span> Full RTL</td><td><span class="check">✓</span> Full LTR</td><td>—</td></tr>
+      <tr><td>Field text direction</td><td><span class="check">✓</span> Per field</td><td><span class="check">✓</span> Per field</td><td><span class="pill-green">✓ Yes</span></td></tr>
+      <tr><td>Label alignment</td><td><span class="check">✓</span> Right</td><td><span class="check">✓</span> Left</td><td><span class="pill-green">✓ Yes</span></td></tr>
+      <tr><td>Placeholder alignment</td><td><span class="check">✓</span> Right</td><td><span class="check">✓</span> Left</td><td><span class="pill-green">✓ Yes</span></td></tr>
+      <tr><td>Validation error messages</td><td><span class="check">✓</span> In Hebrew</td><td><span class="check">✓</span> In English</td><td>—</td></tr>
+      <tr><td>Consent checkbox position</td><td><span class="check">✓</span> Right side</td><td><span class="check">✓</span> Left side</td><td>—</td></tr>
+      <tr><td>Grid layout direction</td><td><span class="check">✓</span> Right to left</td><td><span class="check">✓</span> Left to right</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="div"/>
+
+  <p class="section-eyebrow">Submission flow</p>
+  <h2 class="sh">What happens when someone hits submit</h2>
+
+  <div class="flow">
+    <div class="flow-step"><div class="flow-num">1</div><h4>Validation</h4><p>Client-side checks in the form's language. Errors as floating bubbles — no layout shift.</p></div>
+    <div class="flow-step"><div class="flow-num">2</div><h4>Saved</h4><p>Submission written instantly with timestamp. Field values stored as structured JSON.</p></div>
+    <div class="flow-step"><div class="flow-num">3</div><h4>Pixel</h4><p>Facebook Lead event fires if a Pixel ID is configured for this form.</p></div>
+    <div class="flow-step"><div class="flow-num">4</div><h4>Email</h4><p>HTML email with field-label table delivered to all configured recipients immediately.</p></div>
+    <div class="flow-step"><div class="flow-num">5</div><h4>Thank you</h4><p>Custom thank-you page, button, or redirect — per your configuration.</p></div>
   </div>
 
 </div>
 
 <div class="cta-section">
+  <div class="line"></div>
   <h2>Forming a better future</h2>
-  <p>Log in and publish your first form in under 2 minutes.</p>
-  <a href="/#/admin" class="btn-primary">Get started →</a>
+  <p>Publish your first form in under 2 minutes.</p>
+  <a href="/#/admin" class="cta-pill" data-en="Get started →" data-he="מתחילים ←">Get started →</a>
 </div>
 
 <footer>
-  <a href="/" style="margin-left:16px">Home</a> ·
-  <a href="/features.html" style="margin:0 8px">Features</a> ·
-  <a href="/capabilities.html" style="margin:0 8px">Capabilities</a>
-  <br/><br/>
-  © 2025 tofes.pro — Form Builder Platform
+  <div class="foot-logo">
+    <div class="foot-lm"><svg width="14" height="14" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="3.5" width="13" height="2.2" rx="1.1" fill="white"/><rect x="2.5" y="7.9" width="9" height="2.2" rx="1.1" fill="white"/><rect x="2.5" y="12.3" width="6" height="2.2" rx="1.1" fill="white"/></svg></div>
+    tofes.pro
+  </div>
+  <div class="foot-links">
+    <a href="/">Home</a>
+    <a href="/features.html" data-en="Features" data-he="יכולות">Features</a>
+    <a href="/capabilities.html" data-en="How it works" data-he="איך זה עובד">How it works</a>
+    <a href="/#/admin" data-en="Admin login" data-he="כניסה לניהול">Admin login</a>
+  </div>
+  <span>© 2025 tofes.pro</span>
 </footer>
 
+<script>
+/* Spotlight effect */
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect()
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%')
+    card.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%')
+  })
+  const acc = getComputedStyle(card).getPropertyValue('--acc').trim()
+  card.addEventListener('mouseenter', () => { card.style.boxShadow = `0 24px 48px -12px ${acc}22, 0 0 0 1px ${acc}20` })
+  card.addEventListener('mouseleave', () => { card.style.boxShadow = '' })
+})
+
+/* Language toggle */
+function setLang(lang) {
+  const isHe = lang === 'he'
+  document.documentElement.lang = lang
+  document.documentElement.dir = isHe ? 'rtl' : 'ltr'
+  document.getElementById('btn-en').className = `lbtn ${lang==='en'?'on':'off'}`
+  document.getElementById('btn-he').className = `lbtn ${lang==='he'?'on':'off'}`
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = isHe ? el.dataset.he : el.dataset.en
+  })
+  // Update nav link underline origin
+  document.querySelectorAll('.nav-link::after')
+  const style = document.getElementById('lang-style') || (() => {
+    const s = document.createElement('style'); s.id = 'lang-style'; document.head.appendChild(s); return s
+  })()
+  style.textContent = isHe ? `.nav-link::after{transform-origin:right}` : `.nav-link::after{transform-origin:left}`
+}
+</script>
 </body>
 </html>

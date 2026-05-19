@@ -3,171 +3,212 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Technical Capabilities — tofes.pro Form Builder</title>
-  <meta name="description" content="tofes.pro is built on Supabase, Brevo, and modern React. Explore the technical architecture behind our multilingual form builder — real-time database, edge functions, Facebook Pixel, and full RTL support."/>
+  <title>How tofes.pro Works — Form Builder Technical Overview</title>
+  <meta name="description" content="Learn how tofes.pro works under the hood — real-time submissions, instant email delivery, Facebook Pixel, field-level multilingual support, and GDPR-ready forms."/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://tofes.pro/capabilities.html"/>
-  <meta property="og:title" content="Technical Capabilities — tofes.pro"/>
-  <meta property="og:description" content="Enterprise-grade form infrastructure. Real-time submissions, edge email delivery, Facebook Pixel, and field-level multilingual support."/>
+  <meta property="og:title" content="How tofes.pro Works — Technical Overview"/>
+  <meta property="og:description" content="Real-time submissions, instant email alerts, Facebook Pixel, multilingual RTL support. Enterprise-grade infrastructure, zero complexity."/>
   <meta property="og:url" content="https://tofes.pro/capabilities.html"/>
   <meta property="og:type" content="website"/>
   <meta name="theme-color" content="#F97316"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Outfit',sans-serif;background:#F9FAFB;color:#18181B;line-height:1.65}
+    html{scroll-behavior:smooth}
+    body{font-family:'Outfit',system-ui,sans-serif;background:#F9FAFB;color:#18181B;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
     a{color:inherit;text-decoration:none}
-    nav{position:sticky;top:0;z-index:50;background:rgba(249,250,251,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,232,240,0.8);height:64px} .nav-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
-    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:#18181B;letter-spacing:-0.02em}
-    .logo-mark{width:34px;height:34px;background:linear-gradient(135deg,#F97316,#F59E0B);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .nav-links{display:flex;gap:28px;align-items:center;font-size:14px;font-weight:600;color:#52525B}
-    .nav-links a:hover{color:#F97316}
-    .nav-cta{padding:10px 22px;background:#18181B;color:white;border-radius:10px;font-size:14px;font-weight:700;transition:transform 0.15s,background 0.15s}
-    .nav-cta:hover{background:#27272A;transform:translateY(-1px)}
-    .hero{max-width:800px;margin:0 auto;padding:80px 40px 60px;text-align:center}
-    .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(59,130,246,0.08);border:1.5px solid rgba(59,130,246,0.2);border-radius:100px;font-size:12px;font-weight:700;color:#3B82F6;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:24px}
-    .badge-dot{width:6px;height:6px;border-radius:50%;background:#3B82F6}
-    h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;letter-spacing:-0.04em;line-height:1.08;margin-bottom:20px}
-    h1 span{background:linear-gradient(135deg,#3B82F6,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero-sub{font-size:1.1rem;color:#71717A;max-width:580px;margin:0 auto 40px}
-    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,#F97316,#F59E0B);color:white;font-weight:800;font-size:16px;border-radius:12px;text-decoration:none;box-shadow:0 4px 20px rgba(249,115,22,0.3);transition:transform 0.15s,box-shadow 0.2s}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(249,115,22,0.4)}
-    .content{max-width:1100px;margin:0 auto;padding:40px 40px 100px}
-    .section-label{text-align:center;font-size:13px;font-weight:700;color:#3B82F6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
-    h2.section-title{text-align:center;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:56px}
-    .stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:60px}
-    .stack-card{background:white;border-radius:20px;padding:32px;border:1.5px solid rgba(226,232,240,0.8);transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden}
-    .stack-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
-    .stack-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-    .card-orange::before{background:linear-gradient(90deg,#F97316,#F59E0B)}
-    .card-blue::before{background:linear-gradient(90deg,#3B82F6,#06B6D4)}
-    .card-green::before{background:linear-gradient(90deg,#10B981,#059669)}
-    .card-purple::before{background:linear-gradient(90deg,#8B5CF6,#6D28D9)}
-    .stack-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
-    .stack-card .tech{font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#F97316;margin-bottom:12px}
-    .stack-card p{font-size:14px;color:#71717A;line-height:1.65}
-    .divider{border:none;border-top:1px solid rgba(226,232,240,0.8);margin:60px 0}
-    .flow{display:flex;gap:0;margin-bottom:60px;border:1.5px solid rgba(226,232,240,0.8);border-radius:20px;overflow:hidden;background:white}
-    .flow-step{flex:1;padding:32px 24px;border-right:1.5px solid rgba(226,232,240,0.8);position:relative;text-align:center}
+    body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;opacity:0.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+    nav{position:sticky;top:0;z-index:50;background:rgba(249,250,251,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(226,232,240,0.7)}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:#18181B;letter-spacing:-0.025em;flex-shrink:0}
+    .logo-mark{width:34px;height:34px;background:linear-gradient(135deg,#F97316,#F59E0B);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+    .nav-links{display:flex;gap:32px;align-items:center}
+    .nav-link{font-size:14px;font-weight:600;color:#52525B;position:relative;padding:4px 0;transition:color 0.15s}
+    .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1.5px;background:#F97316;transform:scaleX(0);transition:transform 0.2s cubic-bezier(0.16,1,0.3,1);transform-origin:left}
+    .nav-link:hover{color:#F97316}
+    .nav-link:hover::after{transform:scaleX(1)}
+    html[dir=rtl] .nav-link::after{transform-origin:right}
+    .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .lang-pill-wrap{display:flex;gap:4px}
+    .lbtn{cursor:pointer;padding:7px 16px;border-radius:100px;font-size:13px;font-weight:700;border:1.5px solid;font-family:'Outfit',sans-serif;transition:all 0.15s}
+    .lbtn.on{background:#18181B;color:white;border-color:#18181B}
+    .lbtn.off{background:transparent;color:#71717A;border-color:rgba(226,232,240,0.8)}
+    .lbtn.off:hover{border-color:#18181B;color:#18181B}
+    .admin-btn{padding:10px 22px;background:white;color:#18181B;border:1.5px solid rgba(226,232,240,0.9);border-radius:100px;font-size:14px;font-weight:700;transition:all 0.2s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+    .admin-btn:hover{border-color:#18181B;box-shadow:0 4px 16px rgba(0,0,0,0.1);transform:translateY(-1px)}
+    @media(max-width:768px){.nav-links{display:none}.nav-inner{padding:0 1.25rem}}
+
+    .hero{max-width:760px;margin:0 auto;padding:clamp(4rem,8vw,6rem) 2.5rem clamp(2.5rem,5vw,4rem);text-align:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.18);border-radius:100px;font-size:12px;font-weight:700;color:#3B82F6;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.5rem}
+    .eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#3B82F6;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.85)}}
+    h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;letter-spacing:-0.04em;line-height:1.08;margin-bottom:1.25rem;color:#18181B;text-wrap:balance}
+    h1 span{background:linear-gradient(130deg,#3B82F6 20%,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:1.05rem;color:#71717A;max-width:540px;margin:0 auto 2.5rem;line-height:1.7}
+    .cta-pill{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:#18181B;color:white;font-weight:700;font-size:15px;border-radius:100px;font-family:'Outfit',sans-serif;transition:transform 0.2s cubic-bezier(0.16,1,0.3,1),box-shadow 0.2s;box-shadow:0 4px 24px rgba(0,0,0,0.18)}
+    .cta-pill:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 32px rgba(0,0,0,0.22)}
+    .cta-pill:active{transform:scale(0.97)}
+
+    .content{max-width:1200px;margin:0 auto;padding:0 2.5rem clamp(4rem,8vw,7rem)}
+    .section-eyebrow{font-size:12px;font-weight:700;color:#3B82F6;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem}
+    h2.sh{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;letter-spacing:-0.03em;line-height:1.12;margin-bottom:clamp(2.5rem,5vw,3.5rem);color:#18181B;text-wrap:balance}
+    .div{border:none;border-top:1px solid rgba(226,232,240,0.7);margin:clamp(3rem,6vw,5rem) 0}
+
+    /* Stack cards — 4 up top */
+    .stack-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}
+    .stack-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+    .bento-21{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px}
+    .bento-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+    @media(max-width:1024px){.stack-4{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.stack-4,.stack-2,.bento-21,.bento-3{grid-template-columns:1fr}.content{padding-left:1.25rem;padding-right:1.25rem}.hero{padding-left:1.25rem;padding-right:1.25rem}}
+
+    .card{background:white;border:1px solid rgba(226,232,240,0.55);border-radius:1.5rem;padding:2rem;position:relative;overflow:hidden;cursor:default;box-shadow:0 20px 40px -15px rgba(0,0,0,0.05);transition:box-shadow 0.25s,transform 0.25s}
+    .card::before{content:'';position:absolute;inset:0;border-radius:1.5rem;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),var(--acc,#3B82F6)09,transparent 70%);pointer-events:none;z-index:0}
+    .card::after{content:'';position:absolute;top:0;left:1.5rem;right:1.5rem;height:2px;background:linear-gradient(90deg,var(--acc,#3B82F6)80,transparent);border-radius:0 0 2px 2px;z-index:1}
+    .card:hover{transform:translateY(-3px)}
+    .card-content{position:relative;z-index:2}
+    .card-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#94A3B8;margin-bottom:0.75rem}
+    .card-icon{color:var(--acc,#3B82F6);margin-bottom:0.75rem;line-height:1}
+    .card h3{font-size:15px;font-weight:700;color:#18181B;margin-bottom:0.5rem;line-height:1.3;text-wrap:balance}
+    .card p{font-size:13.5px;color:#71717A;line-height:1.65;margin:0}
+
+    /* Flow */
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid rgba(226,232,240,0.6);border-radius:1.5rem;overflow:hidden;background:white;box-shadow:0 20px 40px -15px rgba(0,0,0,0.05);margin-bottom:clamp(3rem,5vw,4rem)}
+    .flow-step{padding:2rem 1.5rem;border-right:1px solid rgba(226,232,240,0.6);text-align:center;transition:background 0.2s}
     .flow-step:last-child{border-right:none}
-    .flow-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#F97316,#F59E0B);color:white;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
-    .flow-step h4{font-size:15px;font-weight:700;margin-bottom:8px}
-    .flow-step p{font-size:13px;color:#71717A}
-    .lang-table{width:100%;border-collapse:collapse;margin-bottom:60px}
-    .lang-table th{text-align:left;padding:12px 16px;font-size:13px;font-weight:700;color:#52525B;border-bottom:1.5px solid rgba(226,232,240,0.8);background:#F9FAFB}
-    .lang-table td{padding:14px 16px;font-size:14px;border-bottom:1px solid rgba(226,232,240,0.4)}
-    .lang-table tr:last-child td{border-bottom:none}
+    .flow-step:hover{background:#F0F9FF}
+    .flow-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#06B6D4);color:white;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;box-shadow:0 4px 12px rgba(59,130,246,0.25)}
+    .flow-step h4{font-size:14px;font-weight:700;margin-bottom:0.5rem;color:#18181B}
+    .flow-step p{font-size:12.5px;color:#71717A;line-height:1.55}
+    @media(max-width:768px){.flow{grid-template-columns:1fr}.flow-step{border-right:none;border-bottom:1px solid rgba(226,232,240,0.6)}.flow-step:last-child{border-bottom:none}}
+
+    /* Lang table */
+    .lt{width:100%;border-collapse:collapse;margin-bottom:clamp(3rem,5vw,4rem);background:white;border-radius:1.5rem;overflow:hidden;box-shadow:0 20px 40px -15px rgba(0,0,0,0.05)}
+    .lt th{text-align:left;padding:14px 18px;font-size:12px;font-weight:700;color:#52525B;border-bottom:1px solid rgba(226,232,240,0.7);background:#F9FAFB;letter-spacing:0.04em;text-transform:uppercase}
+    .lt td{padding:14px 18px;font-size:14px;border-bottom:1px solid rgba(226,232,240,0.4)}
+    .lt tr:last-child td{border-bottom:none}
+    .lt tr:hover td{background:#F0F9FF}
     .check{color:#10B981;font-weight:700}
-    .pill{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;background:#F0FDF4;color:#15803D}
-    .faq{margin-bottom:60px}
-    .faq-item{border-bottom:1px solid rgba(226,232,240,0.8);padding:20px 0}
+    .pill-green{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;background:#F0FDF4;color:#15803D;letter-spacing:0.03em}
+
+    /* FAQ */
+    .faq-wrap{background:white;border:1px solid rgba(226,232,240,0.55);border-radius:1.5rem;overflow:hidden;box-shadow:0 20px 40px -15px rgba(0,0,0,0.05)}
+    .faq-item{padding:1.75rem 2rem;border-bottom:1px solid rgba(226,232,240,0.7);transition:background 0.2s}
     .faq-item:last-child{border-bottom:none}
-    .faq-item h4{font-size:16px;font-weight:700;margin-bottom:8px}
+    .faq-item:hover{background:#FAFAFA}
+    .faq-item h4{font-size:15px;font-weight:700;margin-bottom:0.6rem;color:#18181B}
     .faq-item p{font-size:14px;color:#71717A;line-height:1.65}
-    .cta-section{text-align:center;padding:80px 40px}
-    .cta-section h2{font-size:2rem;font-weight:900;letter-spacing:-0.03em;margin-bottom:12px}
-    .cta-section p{color:#71717A;font-size:16px;margin-bottom:32px}
-    footer{border-top:1px solid rgba(226,232,240,0.8);padding:24px 40px;text-align:center;color:#A1A1AA;font-size:13px}
-    @media(max-width:768px){nav{padding:0 20px}.hero{padding:60px 20px 40px}.content{padding:20px 20px 60px}.flow{flex-direction:column}.flow-step{border-right:none;border-bottom:1.5px solid rgba(226,232,240,0.8)}.flow-step:last-child{border-bottom:none}}
+
+    .cta-section{text-align:center;padding:clamp(4rem,8vw,7rem) 2.5rem;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,0.06) 0%,transparent 65%);pointer-events:none}
+    .cta-section .line{width:120px;height:2px;background:linear-gradient(90deg,transparent,#3B82F6,#06B6D4,transparent);border-radius:2px;margin:0 auto 2rem}
+    .cta-section h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-0.04em;line-height:1.06;margin-bottom:1rem;color:#18181B;position:relative}
+    .cta-section p{color:#71717A;font-size:16px;margin-bottom:2.5rem;position:relative}
+
+    footer{border-top:1px solid rgba(226,232,240,0.7);padding:1.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .foot-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#18181B}
+    .foot-lm{width:26px;height:26px;background:linear-gradient(135deg,#F97316,#F59E0B);border-radius:7px;display:flex;align-items:center;justify-content:center}
+    .foot-links{display:flex;gap:24px;font-size:13px}
+    .foot-links a{color:#71717A;transition:color 0.15s}
+    .foot-links a:hover{color:#F97316}
+    footer span{color:#A1A1AA;font-size:13px}
   </style>
 </head>
 <body>
 
-<nav><div class="nav-inner">
-  <a href="/" class="logo">
-    <div class="logo-mark">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <rect x="3" y="4" width="14" height="2.5" rx="1.25" fill="white"/>
-        <rect x="3" y="9" width="10" height="2.5" rx="1.25" fill="white"/>
-        <rect x="3" y="14" width="7" height="2.5" rx="1.25" fill="white" opacity="0.7"/>
-      </svg>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-mark">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="3.5" width="13" height="2.2" rx="1.1" fill="white"/><rect x="2.5" y="7.9" width="9" height="2.2" rx="1.1" fill="white"/><rect x="2.5" y="12.3" width="6" height="2.2" rx="1.1" fill="white" opacity="0.7"/></svg>
+      </div>
+      tofes.pro
+    </a>
+    <div class="nav-links">
+      <a href="/features.html"     class="nav-link" data-en="Features"    data-he="יכולות">Features</a>
+      <a href="/capabilities.html" class="nav-link" data-en="How it works" data-he="איך זה עובד">How it works</a>
     </div>
-    tofes.pro
-  </a>
-  <div class="nav-links">
-    <a href="/features.html">Features</a>
-    <a href="/capabilities.html">Capabilities</a>
-    <a href="/#/admin" class="nav-cta">Admin Login</a>
+    <div class="nav-right">
+      <div class="lang-pill-wrap">
+        <button class="lbtn on"  id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lbtn off" id="btn-he" onclick="setLang('he')">עב</button>
+      </div>
+      <a href="/#/admin" class="admin-btn" data-en="Admin login" data-he="כניסה לניהול">Admin login</a>
+    </div>
   </div>
-</div></nav>
+</nav>
 
 <section class="hero">
-  <div class="badge"><span class="badge-dot"></span> Technical Architecture</div>
+  <div class="eyebrow"><span class="eyebrow-dot"></span> <span data-en="Technical Overview" data-he="סקירה טכנית">Technical Overview</span></div>
   <h1>Enterprise infrastructure. <span>Zero complexity.</span></h1>
-  <p class="hero-sub">tofes.pro is built on battle-tested modern infrastructure — real-time database, serverless email delivery, and field-level multilingual support out of the box.</p>
-  <a href="/#/admin" class="btn-primary">Start building →</a>
+  <p class="hero-sub">Reliable real-time submissions, instant email delivery from your own domain, field-level multilingual support, and Facebook Pixel tracking — all out of the box.</p>
+  <a href="/#/admin" class="cta-pill" data-en="Start building →" data-he="מתחילים ←">Start building →</a>
 </section>
 
 <div class="content">
 
-  <p class="section-label">Technology stack</p>
-  <h2 class="section-title">Reliable infrastructure at every layer</h2>
+  <p class="section-eyebrow">Infrastructure</p>
+  <h2 class="sh">Reliable at every layer</h2>
 
-  <div class="stack-grid">
-    <div class="stack-card card-blue">
-      <div class="tech">Database & Auth</div>
-      <h3>Supabase</h3>
-      <p>Every form submission is written instantly to a PostgreSQL database with Row Level Security. Only authenticated admin users can read submissions — public users can only insert. Real-time and reliable.</p>
+  <div class="stack-4">
+    <div class="card" style="--acc:#3B82F6">
+      <div class="card-content">
+        <div class="card-label">Database</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><ellipse cx="11" cy="6" rx="8" ry="3" stroke="#3B82F6" strokeWidth="1.6"/><path d="M3 6v5c0 1.66 3.58 3 8 3s8-1.34 8-3V6" stroke="#3B82F6" strokeWidth="1.6"/><path d="M3 11v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5" stroke="#3B82F6" strokeWidth="1.6"/></svg></div>
+        <h3>Real-time storage</h3>
+        <p>Every submission written instantly with structured JSON. Only authenticated admins can read — public users can only insert.</p>
+      </div>
     </div>
-    <div class="stack-card card-orange">
-      <div class="tech">Email Delivery</div>
-      <h3>Brevo (Sendinblue)</h3>
-      <p>Transactional email sent via Supabase Edge Functions through Brevo's SMTP API. Emails are delivered from your own domain (no-reply@tofes.pro) with DKIM authentication for maximum inbox deliverability.</p>
+    <div class="card" style="--acc:#10B981">
+      <div class="card-content">
+        <div class="card-label">Email delivery</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="13" rx="2.5" stroke="#10B981" strokeWidth="1.6"/><path d="M2 8.5l9 5.5 9-5.5" stroke="#10B981" strokeWidth="1.6" strokeLinecap="round"/></svg></div>
+        <h3>Delivered from your domain</h3>
+        <p>Emails sent from your own domain address with DKIM authentication. Maximum inbox deliverability — not flagged as third-party.</p>
+      </div>
     </div>
-    <div class="stack-card card-green">
-      <div class="tech">Frontend</div>
-      <h3>React + Vite</h3>
-      <p>Built with React 18 and Vite for instant local development and optimized production builds. Deployed to GitHub Pages with a custom domain. Zero server costs, 100% uptime on CDN.</p>
+    <div class="card" style="--acc:#8B5CF6">
+      <div class="card-content">
+        <div class="card-label">Frontend</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="4" width="18" height="14" rx="3" stroke="#8B5CF6" strokeWidth="1.6"/><path d="M2 8h18" stroke="#8B5CF6" strokeWidth="1.6"/><path d="M8 12l-3 3 3 3M14 12l3 3-3 3" stroke="#8B5CF6" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
+        <h3>Zero server costs</h3>
+        <p>Optimized production builds deployed to a global CDN. 100% uptime, fast load everywhere, no backend to maintain.</p>
+      </div>
     </div>
-    <div class="stack-card card-purple">
-      <div class="tech">Tracking</div>
-      <h3>Facebook Pixel</h3>
-      <p>Per-form Pixel ID injection at runtime. PageView fires on load, Lead event fires on successful submission. Fully isolated — different forms can target different ad accounts.</p>
+    <div class="card" style="--acc:#E11D48">
+      <div class="card-content">
+        <div class="card-label">Tracking</div>
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#E11D48" strokeWidth="1.6"/><circle cx="11" cy="11" r="5" stroke="#E11D48" strokeWidth="1.6"/><circle cx="11" cy="11" r="2" fill="#E11D48"/></svg></div>
+        <h3>Per-form Pixel isolation</h3>
+        <p>PageView fires on load, Lead fires on submit. Each form targets a different ad account — fully isolated per client or campaign.</p>
+      </div>
     </div>
   </div>
 
-  <hr class="divider"/>
+  <hr class="div"/>
 
-  <p class="section-label">Submission flow</p>
-  <h2 class="section-title">What happens when someone hits submit</h2>
+  <p class="section-eyebrow">Submission flow</p>
+  <h2 class="sh">What happens when someone hits submit</h2>
 
   <div class="flow">
-    <div class="flow-step">
-      <div class="flow-num">1</div>
-      <h4>Validation</h4>
-      <p>Client-side validation in the form's language. Errors shown as floating bubbles — no layout shift.</p>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">2</div>
-      <h4>Database write</h4>
-      <p>Submission saved to Supabase with timestamp. Field values stored as structured JSON, keyed by field ID.</p>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">3</div>
-      <h4>Pixel event</h4>
-      <p>Facebook Lead event fired if a Pixel ID is configured for this form.</p>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">4</div>
-      <h4>Email dispatch</h4>
-      <p>Edge Function calls Brevo API. HTML email with field-label table delivered to all configured recipients.</p>
-    </div>
-    <div class="flow-step">
-      <div class="flow-num">5</div>
-      <h4>Thank you</h4>
-      <p>User redirected to custom thank-you page or external URL, per form configuration.</p>
-    </div>
+    <div class="flow-step"><div class="flow-num">1</div><h4>Validation</h4><p>Client-side in the form's language. Errors float as bubbles — no layout shift.</p></div>
+    <div class="flow-step"><div class="flow-num">2</div><h4>Saved</h4><p>Written instantly with timestamp. Fields stored as structured JSON keyed by field ID.</p></div>
+    <div class="flow-step"><div class="flow-num">3</div><h4>Pixel</h4><p>Facebook Lead event fires if a Pixel ID is configured for this form.</p></div>
+    <div class="flow-step"><div class="flow-num">4</div><h4>Email</h4><p>Serverless function calls email API. HTML table of field labels and values sent to all recipients.</p></div>
+    <div class="flow-step"><div class="flow-num">5</div><h4>Thank you</h4><p>Custom message, button, or redirect — per your configuration.</p></div>
   </div>
 
-  <hr class="divider"/>
+  <hr class="div"/>
 
-  <p class="section-label">Multilingual support</p>
-  <h2 class="section-title">True right-to-left. Not an afterthought.</h2>
+  <p class="section-eyebrow">Multilingual</p>
+  <h2 class="sh">True right-to-left. Not an afterthought.</h2>
 
-  <table class="lang-table">
+  <table class="lt">
     <thead>
       <tr>
         <th>Capability</th>
@@ -177,98 +218,79 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Form direction</td>
-        <td><span class="check">✓</span> Full RTL</td>
-        <td><span class="check">✓</span> Full LTR</td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td>Field text direction</td>
-        <td><span class="check">✓</span> Per field</td>
-        <td><span class="check">✓</span> Per field</td>
-        <td><span class="pill">✓ Yes</span></td>
-      </tr>
-      <tr>
-        <td>Label alignment</td>
-        <td><span class="check">✓</span> Right</td>
-        <td><span class="check">✓</span> Left</td>
-        <td><span class="pill">✓ Yes</span></td>
-      </tr>
-      <tr>
-        <td>Placeholder alignment</td>
-        <td><span class="check">✓</span> Right</td>
-        <td><span class="check">✓</span> Left</td>
-        <td><span class="pill">✓ Yes</span></td>
-      </tr>
-      <tr>
-        <td>Validation error messages</td>
-        <td><span class="check">✓</span> In Hebrew</td>
-        <td><span class="check">✓</span> In English</td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td>Consent checkbox position</td>
-        <td><span class="check">✓</span> Right side</td>
-        <td><span class="check">✓</span> Left side</td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td>Grid layout direction</td>
-        <td><span class="check">✓</span> Right to left</td>
-        <td><span class="check">✓</span> Left to right</td>
-        <td>—</td>
-      </tr>
+      <tr><td>Form direction</td><td><span class="check">✓</span> Full RTL</td><td><span class="check">✓</span> Full LTR</td><td>—</td></tr>
+      <tr><td>Field text direction</td><td><span class="check">✓</span> Per field</td><td><span class="check">✓</span> Per field</td><td><span class="pill-green">✓ Yes</span></td></tr>
+      <tr><td>Label alignment</td><td><span class="check">✓</span> Right</td><td><span class="check">✓</span> Left</td><td><span class="pill-green">✓ Yes</span></td></tr>
+      <tr><td>Placeholder alignment</td><td><span class="check">✓</span> Right</td><td><span class="check">✓</span> Left</td><td><span class="pill-green">✓ Yes</span></td></tr>
+      <tr><td>Validation error messages</td><td><span class="check">✓</span> In Hebrew</td><td><span class="check">✓</span> In English</td><td>—</td></tr>
+      <tr><td>Consent checkbox position</td><td><span class="check">✓</span> Right side</td><td><span class="check">✓</span> Left side</td><td>—</td></tr>
+      <tr><td>Grid layout direction</td><td><span class="check">✓</span> Right to left</td><td><span class="check">✓</span> Left to right</td><td>—</td></tr>
     </tbody>
   </table>
 
-  <hr class="divider"/>
+  <hr class="div"/>
 
-  <p class="section-label">Common questions</p>
-  <h2 class="section-title">Frequently asked</h2>
+  <p class="section-eyebrow">FAQ</p>
+  <h2 class="sh">Common questions</h2>
 
-  <div class="faq">
-    <div class="faq-item">
-      <h4>Do I need to write any code to use tofes.pro?</h4>
-      <p>No. The admin panel handles everything — form creation, field configuration, color customization, and publishing. Forms are live at a unique URL the moment you save.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Where is my data stored?</h4>
-      <p>All submissions are stored in a PostgreSQL database hosted on Supabase in Frankfurt, Germany (EU West). Data is protected by Row Level Security — only authenticated admins can access it.</p>
-    </div>
-    <div class="faq-item">
-      <h4>How quickly are email notifications sent?</h4>
-      <p>Email notifications are triggered immediately after each submission via a serverless Edge Function. Typical delivery time is under 10 seconds from form submission to inbox.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Can I use the same form for Hebrew and English audiences?</h4>
-      <p>Each form is set to a primary language (Hebrew or English), which controls the grid direction and error message language. You can mix field directions within a single form — for example, a Hebrew form with an English-direction email field.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Does the Facebook Pixel track across different forms?</h4>
-      <p>Each form has its own Pixel ID setting. This lets you assign different ad accounts or campaigns to different forms — useful when running multiple clients or products from the same admin account.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Can I export my submissions?</h4>
-      <p>Yes. The admin submissions panel includes a CSV export button that exports the currently filtered view. The export includes a UTF-8 BOM for correct Hebrew character rendering in Excel.</p>
-    </div>
+  <div class="faq-wrap">
+    <div class="faq-item"><h4>Do I need to write any code?</h4><p>No. The admin panel handles everything — form creation, field configuration, color customization, and publishing. Forms go live the moment you save.</p></div>
+    <div class="faq-item"><h4>Where is my data stored?</h4><p>All submissions are stored in a PostgreSQL database in Frankfurt, Germany (EU West). Data is protected by Row Level Security — only authenticated admins can read it.</p></div>
+    <div class="faq-item"><h4>How fast are email notifications?</h4><p>Email is triggered immediately after each submission via a serverless edge function. Typical delivery time is under 10 seconds from form submission to inbox.</p></div>
+    <div class="faq-item"><h4>Can I mix Hebrew and English in the same form?</h4><p>Yes. Each field has its own direction setting independent of the form's overall language. A Hebrew form can have LTR email and phone fields — and vice versa.</p></div>
+    <div class="faq-item"><h4>Does the Pixel track across different forms?</h4><p>Each form has its own Pixel ID setting, allowing you to assign different ad accounts or campaigns to different forms — useful for running multiple clients from a single admin account.</p></div>
+    <div class="faq-item"><h4>Can I export my submissions?</h4><p>Yes. The submissions panel includes a CSV export that applies your current search and date filter. The file includes a UTF-8 BOM for correct Hebrew rendering in Excel.</p></div>
   </div>
 
 </div>
 
 <div class="cta-section">
-  <h2>Ready to see it in action?</h2>
-  <p>Log in and publish your first form in under 2 minutes.</p>
-  <a href="/#/admin" class="btn-primary">Open admin panel →</a>
+  <div class="line"></div>
+  <h2>Forming a better future</h2>
+  <p>Publish your first form in under 2 minutes.</p>
+  <a href="/#/admin" class="cta-pill" data-en="Open admin panel →" data-he="פתח פאנל ניהול ←">Open admin panel →</a>
 </div>
 
 <footer>
-  <a href="/" style="margin-left:16px">Home</a> ·
-  <a href="/features.html" style="margin:0 8px">Features</a> ·
-  <a href="/capabilities.html" style="margin:0 8px">Capabilities</a>
-  <br/><br/>
-  © 2025 tofes.pro — Form Builder Platform
+  <div class="foot-logo">
+    <div class="foot-lm"><svg width="14" height="14" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="3.5" width="13" height="2.2" rx="1.1" fill="white"/><rect x="2.5" y="7.9" width="9" height="2.2" rx="1.1" fill="white"/><rect x="2.5" y="12.3" width="6" height="2.2" rx="1.1" fill="white"/></svg></div>
+    tofes.pro
+  </div>
+  <div class="foot-links">
+    <a href="/">Home</a>
+    <a href="/features.html" data-en="Features" data-he="יכולות">Features</a>
+    <a href="/capabilities.html" data-en="How it works" data-he="איך זה עובד">How it works</a>
+    <a href="/#/admin" data-en="Admin login" data-he="כניסה לניהול">Admin login</a>
+  </div>
+  <span>© 2025 tofes.pro</span>
 </footer>
 
+<script>
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect()
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%')
+    card.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%')
+  })
+  const acc = getComputedStyle(card).getPropertyValue('--acc').trim()
+  card.addEventListener('mouseenter', () => { card.style.boxShadow = `0 24px 48px -12px ${acc}22, 0 0 0 1px ${acc}20` })
+  card.addEventListener('mouseleave', () => { card.style.boxShadow = '' })
+})
+
+function setLang(lang) {
+  const isHe = lang === 'he'
+  document.documentElement.lang = lang
+  document.documentElement.dir = isHe ? 'rtl' : 'ltr'
+  document.getElementById('btn-en').className = `lbtn ${lang==='en'?'on':'off'}`
+  document.getElementById('btn-he').className = `lbtn ${lang==='he'?'on':'off'}`
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = isHe ? el.dataset.he : el.dataset.en
+  })
+  const style = document.getElementById('lang-style') || (() => {
+    const s = document.createElement('style'); s.id='lang-style'; document.head.appendChild(s); return s
+  })()
+  style.textContent = isHe ? `.nav-link::after{transform-origin:right}` : `.nav-link::after{transform-origin:left}`
+}
+</script>
 </body>
 </html>
