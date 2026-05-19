@@ -1,33 +1,72 @@
 <!doctype html>
-<html lang="he" dir="rtl">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
+    <!-- Primary SEO -->
+    <title>tofes.pro — Multilingual Form Builder | Forming a Better Future</title>
+    <meta name="description" content="Create beautiful landing page forms in minutes. tofes.pro supports Hebrew, English, and any direction. Instant email alerts, Facebook Pixel, submission tracking, and full branding control."/>
+    <meta name="keywords" content="form builder, multilingual forms, RTL forms, Hebrew form builder, landing page forms, lead generation forms, form with email notification"/>
+    <meta name="robots" content="index, follow"/>
+    <link rel="canonical" href="https://tofes.pro/"/>
 
-    <!-- Meta -->
-    <meta name="description" content="tofes.pro — Create beautiful landing page forms in minutes. Multi-language, instant email notifications, submission tracking." />
-    <meta property="og:title" content="tofes.pro — Form Builder" />
-    <meta property="og:description" content="Forming a better future. Create custom forms with RTL support, email alerts, and Facebook Pixel tracking." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://tofes.pro" />
-    <meta name="theme-color" content="#F97316" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="tofes.pro — Multilingual Form Builder"/>
+    <meta property="og:description" content="Forming a better future. Create custom forms with RTL support, instant email alerts, and Facebook Pixel tracking. Live in under 2 minutes."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://tofes.pro/"/>
+    <meta property="og:image" content="https://tofes.pro/favicon-512x512.png"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:locale:alternate" content="he_IL"/>
+    <meta property="og:site_name" content="tofes.pro"/>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="tofes.pro — Multilingual Form Builder"/>
+    <meta name="twitter:description" content="Create beautiful landing page forms in minutes. RTL support, email alerts, Facebook Pixel, submission tracking."/>
+    <meta name="twitter:image" content="https://tofes.pro/favicon-512x512.png"/>
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#F97316"/>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png"/>
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png"/>
+
+    <!-- Sitemap hint -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
-    <title>tofes.pro — Form Builder</title>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "tofes.pro",
+      "url": "https://tofes.pro",
+      "description": "Multilingual form builder with RTL support, instant email notifications, Facebook Pixel integration, and full branding control.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "inLanguage": ["en", "he"]
+    }
+    </script>
 
+    <!-- HashRouter redirect fix -->
     <script>
       const redirect = new URLSearchParams(window.location.search).get('redirect');
       if (redirect) window.history.replaceState(null, '', redirect);
